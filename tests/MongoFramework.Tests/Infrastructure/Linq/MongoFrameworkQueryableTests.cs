@@ -41,6 +41,8 @@ namespace MongoFramework.Tests.Infrastructure.Linq
 			entityCollection.Update(new MongoFrameworkQueryableModel { Title = "EnumerateQueryable" }, EntityEntryState.Added);
 			writerPipeline.Write();
 
+			var abc = queryable.Where(e => e.Title != "abc").OrderBy(e => e.Title).ThenBy(e => e.Id);
+
 			foreach (var entity in queryable)
 			{
 				Assert.AreEqual("EnumerateQueryable", entity.Title);
